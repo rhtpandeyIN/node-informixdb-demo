@@ -1,0 +1,1 @@
+exports.connectionString = "DRIVER={HCL INFORMIX ODBC DRIVER (64-bit)};SERVER=myonedb;DATABASE=nodedb;HOST=localhost;SERVICE=9093;UID=informix;PWD=Password;PROTOCOL=onsoctcp";
