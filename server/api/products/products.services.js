@@ -23,6 +23,40 @@ module.exports.createProduct = function (data, dbConn, callback) {
     }
 };
 
+module.exports.getAllProducts = function (dbConn, callback) {
+    console.log("Products Service : getAllProducts : " );
+    
+    let sql = `select pid, productname, productcategory, price from products`;
+    
+    try {
+        var res = dbConn.querySync(sql);
+        return callback(null, res);
+    }
+    catch(error){
+        return callback(error, null);
+    }
+    finally {
+        dbConn.closeSync();
+    }
+};
+
+module.exports.updateProductById = function (pid, dbConn, callback) {
+    console.log("Products Service : updateProductById : " + pid);
+    
+    let sql = `update products set pid=?, productname=?, productcategory=?, price=? where pid = ?`;
+    
+    try {
+        var res = dbConn.querySync(sql, [pid]);
+        return callback(null, res[0]);
+    }
+    catch(error){
+        return callback(error, null);
+    }
+    finally {
+        dbConn.closeSync();
+    }
+};
+
 module.exports.getProductById = function (product_id, dbConn, callback) {
     console.log("Products Service : getProductById : " + product_id);
     
@@ -38,4 +72,22 @@ module.exports.getProductById = function (product_id, dbConn, callback) {
     finally {
         dbConn.closeSync();
     }
+};
+
+module.exports.deleteProductById = function (pid, dbConn, callback) {
+    console.log("Products Service : deleteProductById : " + pid);
+    
+    let sql = `delete from products where pid = ?`;
+    
+    try {
+        var res = dbConn.querySync(sql, [pid]);
+        return callback(null, res[0]);
+    }
+    catch(error){
+        return callback(error, null);
+    }
+    finally {
+        dbConn.closeSync();
+    }
 }
+

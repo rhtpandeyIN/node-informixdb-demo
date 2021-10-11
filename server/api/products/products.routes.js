@@ -12,19 +12,23 @@ router.get('/', function(req, res, next) {
 // /api/products/product POST API
 router.post('/product', productsController.addProduct);
 
+router.get('/products', productsController.getAllProducts);
+
+router.put('/product/:id', productsController.updateProductById);
+
 router.get('/product/:id', productsController.getProductById);
+
+router.delete('/product/:id', productsController.deleteProductById);
 
 module.exports = router;
 
 
 // api
-// api/products --> get all products
-// api/products --> (post) add more than 1 product at once
+// api/products --> get all products  ---
 // api/products/product (post)  --> will generate id
-// api/products/product/:id (get)
-// api/products/product/:name (get)
+// api/products/product/:id (get)   ---
 // api/products/product/:id (PUT)
-// api/products/product/:id (DELETE)
+// api/products/product/:id (DELETE)   ---
 
 // api/users
 // api/users/user (post)  --> will generate id
