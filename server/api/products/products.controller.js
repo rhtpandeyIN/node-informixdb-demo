@@ -119,9 +119,9 @@ module.exports.getProductById = (req, res, next) => {
     });
 };
 
-module.exports.updateProductById = (req, res, next) => {
-    console.log("Controller : Update Product : " + JSON.stringify(req.params.id));
-    const pid = req.params.id;
+module.exports.updateProduct = (req, res, next) => {
+    console.log("Controller : Update Product : " + JSON.stringify(req.body));
+    const data = req.body;
 
     OneDBService.connectDB(connStr, function (err, dbConn) {
         if (err) {
@@ -132,12 +132,12 @@ module.exports.updateProductById = (req, res, next) => {
             });
         }
         else {
-            ProductsService.updateProductById(pid, dbConn, function (err, output) {
+            ProductsService.updateProduct(data, dbConn, function (err, output) {
                 if (err) {
                     return res.status(400).json({
                         success: false,
                         status: 400,
-                        message: "Unable to get product from database", error: err
+                        message: "Unable to update product into database", error: err
                     });
                 }
                 if (!output) {
@@ -150,8 +150,7 @@ module.exports.updateProductById = (req, res, next) => {
                     return res.status(200).json({
                         success: true,
                         status: 200,
-                        message: "Product updated successfully",
-                        data: output
+                        message: "Product Updated successfully!"
                     });
                 }
             });

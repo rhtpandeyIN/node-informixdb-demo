@@ -19,7 +19,7 @@ router.get('/users', usersController.getAllUsers);
 
 router.get('/user/:id', usersController.getUserById);
 
-//router.put('/user/:id', usersController.updaterById);
+router.put('/user', usersController.updateUser);
 
 router.delete('/user/:id', usersController.deleteUserById);
 

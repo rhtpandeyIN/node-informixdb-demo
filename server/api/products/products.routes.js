@@ -14,7 +14,7 @@ router.post('/product', productsController.addProduct);
 
 router.get('/products', productsController.getAllProducts);
 
-router.put('/product/:id', productsController.updateProductById);
+router.put('/product/:id', productsController.updateProduct);
 
 router.get('/product/:id', productsController.getProductById);
 

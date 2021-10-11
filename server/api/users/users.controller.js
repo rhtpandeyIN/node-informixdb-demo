@@ -106,6 +106,45 @@ module.exports.getUserById = (req, res, next) => {
     });
 };
 
+module.exports.updateUser = (req, res, next) => {
+    console.log("Controller : Update Product : " + JSON.stringify(req.body));
+    const data = req.body;
+
+    OneDBService.connectDB(connStr, function (err, dbConn) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                status: 400,
+                message: "Unable to connect with database", error: err
+            });
+        }
+        else {
+            UsersService.updateUser(data, dbConn, function (err, output) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        status: 400,
+                        message: "Unable to update user into database", error: err
+                    });
+                }
+                if (!output) {
+                    return res.status(400).json({
+                        success: false,
+                        status: 400, msg: 'Bad Request'
+                    });
+                }
+                else {
+                    return res.status(200).json({
+                        success: true,
+                        status: 200,
+                        message: "User Updated successfully!"
+                    });
+                }
+            });
+        }
+    });
+};
+
 module.exports.deleteUserById = (req, res, next) => {
     console.log("Controller : Delete User : " + JSON.stringify(req.params.id));
     const uid = req.params.id;

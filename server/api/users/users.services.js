@@ -61,6 +61,30 @@ module.exports.getUserById = function (uid, dbConn, callback) {
     }
 };
 
+module.exports.updateUser = function (data, dbConn, callback) {
+    console.log("Users Service : Update User In Service : " + data);
+    
+    let sql = `update users set firstname=?, lastname=?, useremail=?, userpassword=? where uid = ?`;
+    
+    try {
+        var res = dbConn.querySync(sql, 
+            [
+                data.firstname,
+                data.lastname,
+                data.useremail,
+                data.userpassword,
+                data.uid
+                ]
+            );
+        return callback(null, res);
+    }
+    catch(error){
+        return callback(error, null);
+    }
+    finally {
+        dbConn.closeSync();
+    }
+};
 
 module.exports.deleteUserById = function (uid, dbConn, callback) {
     console.log("Users Service : deleteUserById : " + uid);
@@ -77,4 +101,4 @@ module.exports.deleteUserById = function (uid, dbConn, callback) {
     finally {
         dbConn.closeSync();
     }
-}
+};
