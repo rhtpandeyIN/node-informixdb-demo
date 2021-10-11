@@ -107,7 +107,7 @@ module.exports.getUserById = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-    console.log("Controller : Update Product : " + JSON.stringify(req.body));
+    console.log("Controller : Update User : " + JSON.stringify(req.body));
     const data = req.body;
 
     OneDBService.connectDB(connStr, function (err, dbConn) {
